@@ -10,4 +10,4 @@ Mostly climate variables have been used to build the ENM, not local availability
 
 Further details about methods and overall results can be found in the following publication : 
 
-Pushed Northward by Climate Change: Range Shifts With a Chance of Co-occurrence Reshuffling in the Forecast for Northern European Odonates. Mathieu Pélissié, Frank Johansson, Chaz Hyseni. _Environmental Entomology_, Volume 51, Issue 5, October 2022, Pages 910–921, https://doi.org/10.1093/ee/nvac056
+Pushed Northward by Climate Change: Range Shifts With a Chance of Co-occurrence Reshuffling in the Forecast for Northern European Odonates. __Mathieu Pélissié__, __Frank Johansson__, __Chaz Hyseni__. _Environmental Entomology_, __51__(5), 2022, pp. 910–921, https://doi.org/10.1093/ee/nvac056
