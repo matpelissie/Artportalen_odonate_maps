@@ -1,53 +1,57 @@
 server <- function(input, output) {
   
+  # Expression that generates a histogram. The expression is
+  # wrapped in a call to renderPlot to indicate that:
+  #
+  # 1) It is "reactive" and therefore should
+  #     re-execute automatically when inputs change
+  # 2) Its output type is a plot
+  
   output$map <- leaflet::renderLeaflet({
     
-    # Display range change map:
+    dir <- "Data/SDM/Projections_rep2_10km/"
+    dir2 <- "Data/SDM/Odonata_rep2_10km/"
+    
     if (input$maptype == "range change" & input$period != "present day"){
       
-      # With terra::
-      pres <- terra::rast(paste0("Data/SDM/", input$species, "/", sub(" ", "_", input$species), 
-                                 "_rep2_10km/Rasters/Binary.tif"))
-      proj <- terra::rast(paste0("Data/SDM/", input$species, "/", 
-                                 input$period, "_", input$gcm, "_", input$rcp, "_", 
-                                 sub(" ", "_", input$species), "_rep2_10km/Rasters/Binary.tif"))
-      
+      pres <- raster::raster(paste0("../../", dir2, sub(" ", "_", input$species), 
+                                             "_rep2_10km/Rasters/Binary.tif"))
+      proj <- raster::raster(paste0("../../", dir, sub(" ", "_", input$species), "_rep2_10km/", 
+                                             input$period, "_", input$gcm, "_", input$rcp, "_", 
+                                             sub(" ", "_", input$species), "_rep2_10km/Rasters/Binary.tif"))
+
       lay <- 2 * proj - pres
       
       pal <- leaflet::colorFactor(c(Extinction="#A50026",
-                                    Absence="#DCDCDC",
-                                    Stability="#B5DF73",
-                                    Colonization="#006837"),
-                                  -1:2, na.color = "transparent")
+                                     Absence="#DCDCDC",
+                                     Stability="#B5DF73",
+                                     Colonization="#006837"),
+                                   -1:2, na.color = "transparent")
       
-      labels <- c("Extinction", "Absence", "Still present", "Colonization")
+      labels <- c("Extinction", "Absence", "Stability", "Colonization")
       leg <- "Status"
       
     } else {
       
-      # Display present-day map:
       if (input$period == "present day"){
         
-        lay <- terra::rast(paste0("Data/SDM/", input$species, "/", sub(" ", "_", input$species), 
-                                  "_rep2_10km/Rasters/", stringr::str_to_title(input$maptype), ".tif"))
+        lay <- raster::raster(paste0("../../", dir2, sub(" ", "_", input$species), 
+                                     "_rep2_10km/Rasters/", stringr::str_to_title(input$maptype), ".tif"))
         
-      # Display future map:  
       } else {
         
-        lay <- terra::rast(paste0("Data/SDM/", input$species, "/", 
-                                  input$period, "_", input$gcm, "_", input$rcp, "_", 
-                                  sub(" ", "_", input$species), "_rep2_10km/Rasters/",
-                                  stringr::str_to_title(input$maptype), ".tif"))
-        
-        
+        lay <- raster::raster(paste0("../../", dir, sub(" ", "_", input$species), "_rep2_10km/", 
+                                     input$period, "_", input$gcm, "_", input$rcp, "_", 
+                                     sub(" ", "_", input$species), "_rep2_10km/Rasters/",
+                                     stringr::str_to_title(input$maptype), ".tif"))
       }
       
       if (input$maptype == "binary"){
         
         
         pal <- leaflet::colorFactor(c(Absence="#DCDCDC",
-                                      Presence="black"),
-                                    0:1, na.color = "transparent")
+                                       Presence="black"),
+                                     0:1, na.color = "transparent")
         labels <- c("Absence", "Presence")
         leg <- "Status"
         
@@ -69,7 +73,7 @@ server <- function(input, output) {
                          pal = pal, values = raster::values(lay),
                          labFormat = function(type, cuts, p) paste0(labels),
                          title=leg
-      )
+                         )
     
     
     if(input$occurrence){

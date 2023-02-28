@@ -30,7 +30,8 @@ ui <- shiny::fluidPage(
       # Selector for GCM
       shiny::selectInput(inputId = "gcm",
                          label = "Choose a climate model",
-                         choices = c("ACCESS1.0", "CCSM4", "CMCC.CM", "CNRM.CM5","GFDL.ESM2G", "HadGEM2.CC", "MPI.ESM.MR")),
+                         # choices = c("ACCESS1.0", "CCSM4", "CMCC.CM", "CNRM.CM5","GFDL.ESM2G", "HadGEM2.CC", "MPI.ESM.MR")),
+                         choices = c("ACCESS1.0","CMCC.CM")),
       
       # Display occurrence records
       shiny::checkboxInput(inputId = "occurrence",

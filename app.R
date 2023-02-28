@@ -20,6 +20,10 @@ occ_thin <- readr::read_csv("Data/Occurrence/thinned_10km.csv")
 spe <- unique(occ_thin$Species)
 spe <- spe[!spe %in% c("Aeshna affinis","Anax ephippiger","Nehalennia speciosa")]
 
+# Limit to a few species for now:
+spe <- c("Aeshna viridis", "Leucorrhinia albifrons", "Leucorrhinia caudalis",
+         "Leucorrhinia pectoralis", "Ophiogomphus cecilia")
+
 WGS84 <- "+proj=longlat +datum=WGS84 +no_defs"
 # occ_spe <- sf::st_as_sf(occ2, coords = c("Longitude", "Latitude"), crs = sp::CRS(WGS84), agr = "Species")
 
@@ -35,4 +39,5 @@ WGS84 <- "+proj=longlat +datum=WGS84 +no_defs"
 #                              "Aeshna_grandis", "_rep2_10km/Rasters/Binary.tif"))
 # lay <- 2*proj-pres
 
-shiny::runApp("Code/Artportalen_odonate_maps")
+# shiny::runApp("Code/Artportalen_odonate_maps")
+shiny::runApp()
