@@ -1,5 +1,7 @@
 # Swedish odonate maps
 
+![package badge](Data/strip.png)
+
 The goal of this repository is to give access to **ecological niche models** (ENMs) of Swedish odonate species through maps and a [**R Shiny app**](https://matpelissie.shinyapps.io/Artportalen_odonate_maps/). Both **present-day** and **future models** are available allowing local observers to **target under-surveyed** but **potentially favorable areas**.
 
 The Shiny app to browse species maps can be accessed here: <https://matpelissie.shinyapps.io/Artportalen_odonate_maps/>.
